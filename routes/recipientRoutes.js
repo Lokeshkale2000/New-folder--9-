@@ -12,6 +12,6 @@ router.get('/', recipientController.getAllRecipients);        // Read all (Corre
 router.put('/:id', recipientController.updateRecipient);      // Update
 
 // Route to delete a recipient by ID
-router.delete('/:id', recipientController.deleteRecipient);   // Delete
+router.delete('/', recipientController.deleteRecipient);   // Delete
 
 module.exports = router;

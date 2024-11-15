@@ -5,7 +5,7 @@ const nodemailer = require('nodemailer');
 // POST: Save Payment Data
 const savePaymentData = async (req, res) => {
   try {
-    const { cardNumber, cardHolder, expiry, cvv, email } = req.body;
+    const { cardNumber, cardHolder, expiry, cvv } = req.body;
 
     // Save payment details to database
     const payment = new Payment({

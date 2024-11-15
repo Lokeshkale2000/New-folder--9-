@@ -21,6 +21,7 @@
     "new-folder-(9)": "file:",
     "nodemailer": "^6.9.16",
     "pdfkit": "^0.15.1",
-    "stripe": "^17.3.1"
+    "stripe": "^17.3.1",
+    "vercel": "^39.0.2"
   }
 }

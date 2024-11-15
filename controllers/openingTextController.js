@@ -49,15 +49,21 @@ exports.updateOpeningText = async (req, res) => {
 };
 
 // Delete Opening Text by ID
+
 exports.deleteOpeningText = async (req, res) => {
   try {
-    const { id } = req.params;
-    const deletedOpeningText = await OpeningText.findByIdAndDelete(id);
-    if (!deletedOpeningText) {
-      return res.status(404).json({ message: 'Opening text not found' });
+    // Delete all opening texts in the collection
+    const deletedOpeningTexts = await OpeningText.deleteMany({});
+
+    // Check if any opening texts were deleted
+    if (deletedOpeningTexts.deletedCount === 0) {
+      return res.status(404).json({ message: 'No opening texts found to delete' });
     }
-    res.status(200).json({ message: 'Opening text deleted successfully' });
+
+    res.status(200).json({
+      message: `All opening texts deleted successfully`,
+    });
   } catch (error) {
-    res.status(500).json({ message: 'Failed to delete opening text', error: error.message });
+    res.status(500).json({ message: 'Failed to delete opening texts', error: error.message });
   }
 };

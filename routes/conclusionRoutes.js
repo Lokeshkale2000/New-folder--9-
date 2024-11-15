@@ -18,6 +18,6 @@ router.get('/:id', conclusionController.getConclusionById);
 router.put('/:id', conclusionController.updateConclusion);
 
 // Route to delete a specific conclusion by ID
-router.delete('/:id', conclusionController.deleteConclusion);
+router.delete('/', conclusionController.deleteConclusion);
 
 module.exports = router;

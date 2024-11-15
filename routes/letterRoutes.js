@@ -23,6 +23,6 @@ router.get('/:id', getLetterById);
 router.put('/:id', updateLetter);
 
 // Delete a letter by ID
-router.delete('/:id', deleteLetter);
+router.delete('/', deleteLetter);
 
 module.exports = router;

@@ -65,15 +65,22 @@ exports.updateSubject = async (req, res) => {
   }
 };
 
-// DELETE: Delete a subject by ID
-exports.deleteSubject = async (req, res) => {
+
+exports.deleteSubject = async (_req, res) => {
   try {
-    const subject = await Subject.findByIdAndDelete(req.params.id);
-    if (!subject) {
-      return res.status(404).json({ message: 'Subject not found' });
+    // Delete all subjects in the collection
+    const deletedSubjects = await Subject.deleteMany({});
+
+    // Check if any subjects were deleted
+    if (deletedSubjects.deletedCount === 0) {
+      return res.status(404).json({ message: 'No subjects found to delete' });
     }
-    res.status(200).json({ message: 'Subject deleted successfully' });
+
+    res.status(200).json({
+      message: `All subjects deleted successfully`,
+    });
   } catch (err) {
-    res.status(500).json({ message: 'Error deleting subject', error: err });
+    res.status(500).json({ message: 'Error deleting subjects', error: err });
   }
 };
+

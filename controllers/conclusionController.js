@@ -62,16 +62,21 @@ exports.updateConclusion = async (req, res) => {
   }
 };
 
-// Delete a conclusion by ID
+
 exports.deleteConclusion = async (req, res) => {
   try {
-    const conclusion = await Conclusion.findByIdAndDelete(req.params.id);
-    if (conclusion) {
-      res.json({ message: 'Conclusion deleted successfully' });
-    } else {
-      res.status(404).json({ message: 'Conclusion not found' });
+    // Delete all conclusions in the collection
+    const deletedConclusions = await Conclusion.deleteMany({});
+
+    // Check if any conclusions were deleted
+    if (deletedConclusions.deletedCount === 0) {
+      return res.status(404).json({ message: 'No conclusions found to delete' });
     }
+
+    res.status(200).json({
+      message: `Successfully deleted ${deletedConclusions.deletedCount} conclusions`,
+    });
   } catch (error) {
-    res.status(500).json({ message: 'Error deleting conclusion', error });
+    res.status(500).json({ message: 'Error deleting conclusions', error });
   }
 };

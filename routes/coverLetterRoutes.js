@@ -22,6 +22,6 @@ router.get("/:id", getCoverLetterById);
 router.put("/:id", updateCoverLetter);
 
 // Delete route for deleting cover letter by ID
-router.delete("/", deleteCoverLetter);
+router.delete("/:id", deleteCoverLetter);
 
 module.exports = router;

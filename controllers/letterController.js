@@ -67,16 +67,24 @@ exports.updateLetter = async (req, res) => {
   }
 };
 
-// Delete: Delete a letter body text by ID
+
+
+
 exports.deleteLetter = async (req, res) => {
   try {
-    const deletedLetter = await Letter.findByIdAndDelete(req.params.id);
-    if (!deletedLetter) {
-      return res.status(404).json({ message: 'Letter not found' });
+    // Delete all letters in the collection
+    const deletedLetters = await Letter.deleteMany({});
+
+    // Check if any letters were deleted
+    if (deletedLetters.deletedCount === 0) {
+      return res.status(404).json({ message: 'No letters found to delete' });
     }
-    res.status(200).json({ message: 'Letter deleted successfully', letter: deletedLetter });
+
+    res.status(200).json({
+      message: `All letters deleted successfully`,
+    });
   } catch (error) {
-    console.error('Error deleting letter:', error);
-    res.status(500).json({ message: `Server error: Could not delete letter. ${error.message}` });
+    console.error('Error deleting letters:', error);
+    res.status(500).json({ message: `Server error: Could not delete letters. ${error.message}` });
   }
 };
